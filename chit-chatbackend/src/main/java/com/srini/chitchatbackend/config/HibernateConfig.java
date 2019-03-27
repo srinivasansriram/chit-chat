@@ -26,7 +26,7 @@ public class HibernateConfig {
 	
 	// data source will be available 
 	@Bean
-	private DataSource getDataSource()
+		public DataSource getDataSource()
 	{
 		BasicDataSource  dataSource = new BasicDataSource();
 		//providing database connection information
@@ -36,7 +36,7 @@ public class HibernateConfig {
 		dataSource.setUsername(DATABASE_USERNAME);
 		dataSource.setPassword(DATABASE_PASSWORD);
 		
-				return dataSource;
+		return dataSource;
 	}
 	
 	
