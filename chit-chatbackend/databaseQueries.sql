@@ -13,3 +13,55 @@ CONSTRAINT pk_category_id PRIMARY KEY (id)
 INSERT INTO CATEGORY(name,description,image_url,is_active) values('panipuri','this is a description of panipuri','CAT_1.png',true);
 INSERT INTO CATEGORY(name,description,image_url,is_active) values('bhelpuri','this is a description of bhelpuri','CAT_2.png',true);
 INSERT INTO CATEGORY(name,description,image_url,is_active) values('sevpuri','this is a description of sevpuri','CAT_3.png',true);
+
+
+
+
+CREATE TABLE user_detail(
+id IDENTITY,
+first_name varchar(50),
+last_name VARCHAR(50),
+	role VARCHAR(50),
+	enabled BOOLEAN,
+	password VARCHAR(60),
+	email VARCHAR(100),
+	contact_number VARCHAR(15),	
+	CONSTRAINT pk_user_id PRIMARY KEY(id),);
+	
+	INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, contact_number) 
+VALUES ('sri', 'nivas', 'ADMIN', true, '$2a$06$ORtBskA2g5Wg0HDgRE5ZsOQNDHUZSdpJqJ2.PGXv0mKyEvLnKP7SW', 'nivas@gmail.com', '8015401998');
+INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, contact_number) 
+VALUES ('teddy', 'd', 'SUPPLIER', true, '$2a$06$bzYMivkRjSxTK2LPD8W4te6jjJa795OwJR1Of5n95myFsu3hgUnm6', 'td@gmail.com', '9487433524');
+INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, contact_number) 
+VALUES ('Ravikumar', 's', 'SUPPLIER', true, '$2a$06$i1dLNlXj2uY.UBIb9kUcAOxCigGHUZRKBtpRlmNtL5xtgD6bcVNOK', 'ra@gmail.com', '9841123122');
+
+CREATE TABLE product (
+	id IDENTITY,
+	code VARCHAR(20),
+	name VARCHAR(50),
+	special VARCHAR(50),
+	description VARCHAR(255),
+	unit_price DECIMAL(10,2),
+	quantity INT,
+	is_active BOOLEAN,
+	category_id INT,
+	supplier_id INT,
+	purchases INT DEFAULT 0,
+	views INT DEFAULT 0,
+	CONSTRAINT pk_product_id PRIMARY KEY (id),
+ 	CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id),
+	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES user_detail(id),	
+);	
+INSERT INTO product (code, name, special, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDABC123DEFX', 'pani puri', 'north', 'This is pani puri', 18000, 5, true, 3, 2, 0, 0 );
+INSERT INTO product (code, name, special, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDDEF123DEFX', 'bhel puri', 'north', 'This is bhel puri', 32000, 2, true, 3, 3, 0, 0 );
+INSERT INTO product (code, name, special, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDPQR123WGTX', 'dhai puri', 'south', 'This is dhai puri', 57000, 5, true, 3, 2, 0, 0 );
+INSERT INTO product (code, name, special, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDMNO123PQRX', 'pav bhaji', 'south', 'This is pav bhaji', 54000, 3, true, 1, 2, 0, 0 );
+INSERT INTO product (code, name, special, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDABCXYZDEFX', 'chenna masala', 'north west', 'This is chenna masala', 48000, 5, true, 1, 3, 0, 0 );
